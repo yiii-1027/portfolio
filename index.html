@@ -34,7 +34,7 @@
     --mono: "Geist Mono", ui-monospace, monospace;
 
     /* Type scale — only 4 levels */
-    --t-display: clamp(64px, 7.5vw, 140px);
+    --t-display: clamp(48px, 7.5vw, 110px);
     --t-h2: clamp(36px, 4vw, 56px);
     --t-body: 17px;
     --t-meta: 12px;
@@ -46,7 +46,8 @@
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--bg);
+    background-color: var(--bg);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.07 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
     color: var(--ink);
     font-family: var(--sans);
     font-size: var(--t-body);
@@ -55,16 +56,7 @@
     overflow-x: hidden;
   }
 
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 100;
-    opacity: 0.28;
-    mix-blend-mode: multiply;
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.07 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
-  }
+  body::before { display: none; }
 
   /* ——— Navigation ——— */
   nav {
@@ -198,7 +190,7 @@
 
   .hero-tagline em {
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     color: var(--accent);
   }
 
@@ -318,6 +310,12 @@
     border-top: 1px solid var(--line);
   }
 
+  /* Alternating background for case studies */
+  .case-study:nth-of-type(odd)  { background: var(--bg); }
+  .case-study:nth-of-type(even) { background: var(--bg-deep); }
+
+  @media (max-width: 1100px) { }
+
   .case-head {
     display: grid;
     grid-template-columns: 1fr 320px;
@@ -401,7 +399,7 @@
 
   /* Wuwei specific — transparent background to blend with portfolio bg */
   #ww-frame {
-    background: var(--bg);
+    background: var(--bg-deep);
   }
 
   #ww-frame iframe {
@@ -1724,7 +1722,7 @@
 
   .vs-desc em {
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     color: var(--accent);
   }
 
@@ -2263,7 +2261,7 @@
   /* Body text highlight — no italic */
   .hl {
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     color: var(--accent);
   }
 </style>
@@ -3089,7 +3087,7 @@
       <div class="case-section-label">Solutions · 優化設計</div>
       <p class="vs-desc" style="margin-bottom: 32px; max-width: 720px;">
         對應 7 個關鍵問題的 Before / After 對照——點擊任一張圖可放大檢視。<br>
-        <span style="display: inline-block; margin-top: 8px; font-size: 13px; color: var(--ink-muted);">※ 對照圖保留 Walker Land 原本的品牌橘色作為主視覺，維持與原平台的<span class="hl" style="color: var(--accent); font-style: normal; font-weight: 500;">品牌語彙延續性</span>。</span>
+        <span style="display: inline-block; margin-top: 8px; font-size: 13px; color: var(--ink-muted);">※ 對照圖保留 Walker Land 原本的品牌橘色作為主視覺，維持與原平台的<span class="hl" style="color: var(--accent); font-style: normal; font-weight: 400;">品牌語彙延續性</span>。</span>
       </p>
 
       <div class="solutions-grid">
@@ -4093,7 +4091,6 @@
 
 <script>
   const revealEls = document.querySelectorAll('.reveal');
-  // Always start at top on page load
   if (history.scrollRestoration) history.scrollRestoration = 'manual';
   window.scrollTo(0, 0);
   const observer = new IntersectionObserver((entries) => {
